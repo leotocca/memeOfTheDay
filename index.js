@@ -13,4 +13,7 @@ fetch('https://api.imgflip.com/get_memes')
 	)
 	.then(processedArr =>
 		processedArr.filter(x => x.width < 500 && x.height < 500)
+	)
+	.then(filteredArr =>
+		filteredArr.sort((a, b) => (Number(a.id) > Number(b.id) ? 1 : -1))
 	);
