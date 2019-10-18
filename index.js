@@ -6,10 +6,11 @@ fetch('https://api.imgflip.com/get_memes')
 		return response.json();
 	})
 	.then(json =>
-		console.log(
-			json.data.memes.map(element => {
-				const { id, name, width, height, url } = element;
-				return { id, name, width, height, url };
-			})
-		)
+		json.data.memes.map(element => {
+			const { id, name, width, height, url } = element;
+			return { id, name, width, height, url };
+		})
+	)
+	.then(processedArr =>
+		processedArr.filter(x => x.width < 500 && x.height < 500)
 	);
