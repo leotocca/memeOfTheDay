@@ -1,3 +1,5 @@
+'use strict';
+
 export { apiEndpoint, getMemes };
 
 const apiEndpoint = 'https://api.imgflip.com/get_memes';
