@@ -1,14 +1,14 @@
-'use strict';
+export { ENDPOINT, getMemes };
 
-export { apiEndpoint, getMemes };
+import { checkStatus } from './utils.js';
 
-const apiEndpoint = 'https://api.imgflip.com/get_memes';
+const ENDPOINT = 'https://api.imgflip.com/get_memes';
 
 function getMemes(url) {
-	return fetch(url).then(response => {
-		response.status === 200
-			? console.log('Successful request!')
-			: console.log(`Oops, we get a ${response.status} error`);
-		return response.json();
-	});
+	return fetch(url)
+		.then(response => {
+			checkStatus(response);
+			return response.json();
+		})
+		.then(response => response.data.memes);
 }
