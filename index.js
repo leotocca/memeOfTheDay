@@ -1,3 +1,5 @@
+'use strict';
+
 import { getMemes, apiEndpoint } from './api.js';
 
 getMemes(apiEndpoint)
@@ -6,6 +8,10 @@ getMemes(apiEndpoint)
 	.then(response => sortResponse(response))
 	.then(response => console.dir(response))
 	.catch(error => console.log(error));
+
+function getRandomMeme(arr) {
+	return arr[Math.floor(Math.random() * arr.length)];
+}
 
 function parseResponse(response) {
 	return response.data.memes.map(element => {
@@ -21,6 +27,15 @@ function filterResponse(response) {
 function sortResponse(response) {
 	return response.sort((a, b) => (Number(a.id) > Number(b.id) ? 1 : -1));
 }
+
+const container = document.querySelector('.container');
+
+container.addEventListener('click', element => {
+	if (element.target.nodeName === 'BUTTON') {
+		element.target.parentElement.querySelector('h1').style.display = 'none';
+		element.target.innerText = 'Get another random meme!';
+	}
+});
 
 // fetch('https://api.imgflip.com/get_memes')
 // 	.then(response => {
