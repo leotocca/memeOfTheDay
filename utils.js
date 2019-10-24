@@ -1,14 +1,9 @@
 export {
-	getRandomMeme,
 	checkStatus,
 	format,
 	filterMemesLowerThan,
 	sortResponseInAscendingOrder
 };
-
-function getRandomMeme(arr) {
-	return arr[Math.floor(Math.random() * arr.length)];
-}
 
 function checkStatus(response) {
 	response.status === 200
