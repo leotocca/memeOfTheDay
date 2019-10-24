@@ -6,13 +6,15 @@ import {
 	sortResponseInAscendingOrder
 } from './utils.js';
 
-let memesArray = [];
-let currentDayMeme = {};
+const container = document.querySelector('.container');
+const img = document.querySelector('.container img');
 
-getMemes(ENDPOINT)
+const memes = getMemes(ENDPOINT)
 	.then(response => response.map(response => format(response)))
 	.then(response => filterMemesLowerThan(response, 500))
-	.then(response => sortResponseInAscendingOrder(response))
+	.then(response => sortResponseInAscendingOrder(response));
+
+memes
 	.then(response => {
 		console.dir(response);
 		return getMemeOfTheDay(response);
@@ -20,19 +22,21 @@ getMemes(ENDPOINT)
 	.catch(error => console.error(error.message));
 
 function getRandomMeme(arr) {
-	return arr[Math.floor(Math.random() * arr.length)];
+	const randomNumber = Math.floor(Math.random() * arr.length);
+	const memeUrl = arr[randomNumber].url;
+	img.setAttribute('src', `${memeUrl}`);
 }
 
 function getMemeOfTheDay(arr) {
 	const currentDate = new Date();
-	return arr[currentDate.getDate() - 1];
+	const memeUrl = arr[currentDate.getDate() - 1].url;
+	img.setAttribute('src', `${memeUrl}`);
 }
-
-const container = document.querySelector('.container');
 
 container.addEventListener('click', element => {
 	if (element.target.nodeName === 'BUTTON') {
 		element.target.parentElement.querySelector('h1').style.display = 'none';
 		element.target.innerText = 'Get another random meme!';
+		memes.then(memes => getRandomMeme(memes));
 	}
 });
