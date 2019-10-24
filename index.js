@@ -6,8 +6,8 @@ import {
 	sortResponseInAscendingOrder
 } from './utils.js';
 
-let memesArray = [];
-let currentDayMeme = {};
+const container = document.querySelector('.container');
+const img = document.querySelector('.container img');
 
 getMemes(ENDPOINT)
 	.then(response => response.map(response => format(response)))
@@ -25,10 +25,8 @@ function getRandomMeme(arr) {
 
 function getMemeOfTheDay(arr) {
 	const currentDate = new Date();
-	return arr[currentDate.getDate() - 1];
+	img.setAttribute('src', `${arr[currentDate.getDate() - 1].url}`);
 }
-
-const container = document.querySelector('.container');
 
 container.addEventListener('click', element => {
 	if (element.target.nodeName === 'BUTTON') {
