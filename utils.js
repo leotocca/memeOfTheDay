@@ -26,7 +26,7 @@ function sortResponseInAscendingOrder(response) {
 }
 
 function setImageHover(meme) {
-	if (!document.querySelector('.test')) {
+	if (!document.querySelector('.overlay')) {
 		addTitleHTML(meme);
 	} else {
 		updateTitle(meme);
@@ -34,22 +34,20 @@ function setImageHover(meme) {
 }
 
 function addTitleHTML(meme) {
-	const tempDiv = document.createElement('div');
 	const div = document.createElement('div');
 	const text = document.createElement('p');
 
+	div.classList.add('overlay');
+
+	text.classList.add('text');
 	text.innerText = meme.name;
 
-	div.classList.add('image-hover');
-
-	tempDiv.appendChild(div);
 	div.appendChild(text);
 
-	document
-		.querySelector('.btn-get-meme')
-		.insertAdjacentHTML('beforebegin', tempDiv.innerHTML);
+	document.querySelector('.container').appendChild(div);
+	//.insertAdjacentHTML('beforebegin', tempDiv.innerHTML);
 }
 
 function updateTitle(meme) {
-	document.querySelector('.test p').innerHTML = meme.name;
+	document.querySelector('.overlay p').innerHTML = meme.name;
 }
