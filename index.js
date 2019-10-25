@@ -7,7 +7,7 @@ import {
 	setImageHover
 } from './utils.js';
 
-const container = document.querySelector('.container');
+const body = document.querySelector('.body');
 const img = document.querySelector('.container img');
 
 const memes = getMemes(ENDPOINT)
@@ -37,7 +37,7 @@ function getMemeOfTheDay(arr) {
 	img.setAttribute('src', `${memeURL}`);
 }
 
-container.addEventListener('click', element => {
+body.addEventListener('click', element => {
 	if (element.target.nodeName === 'BUTTON') {
 		element.target.parentElement.querySelector('h1').style.display = 'none';
 		element.target.innerText = 'Get another random meme!';
