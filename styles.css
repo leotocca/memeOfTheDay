@@ -4,6 +4,11 @@
 	box-sizing: border-box;
 }
 
+body {
+	background-color: #41b3a3;
+	height: 100vh;
+}
+
 .container {
 	display: flex;
 	flex-direction: column;
@@ -19,6 +24,10 @@ h1 {
 	text-transform: uppercase;
 	text-align: center;
 	margin-bottom: 30px;
+}
+
+img {
+	max-width: 500px;
 }
 
 button {
@@ -38,9 +47,4 @@ button {
 button:hover {
 	background-color: #fff;
 	color: #41b3a3;
-}
-
-body {
-	background-color: #41b3a3;
-	height: 100vh;
 }
