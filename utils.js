@@ -2,7 +2,8 @@ export {
 	checkStatus,
 	format,
 	filterMemesLowerThan,
-	sortResponseInAscendingOrder
+	sortResponseInAscendingOrder,
+	setImageHover
 };
 
 function checkStatus(response) {
@@ -22,4 +23,33 @@ function filterMemesLowerThan(response, size) {
 
 function sortResponseInAscendingOrder(response) {
 	return response.sort((a, b) => Number(a.id) - Number(b.id));
+}
+
+function setImageHover(meme) {
+	if (!document.querySelector('.test')) {
+		addTitleHTML(meme);
+	} else {
+		updateTitle(meme);
+	}
+}
+
+function addTitleHTML(meme) {
+	const tempDiv = document.createElement('div');
+	const div = document.createElement('div');
+	const text = document.createElement('p');
+
+	text.innerText = meme.name;
+
+	div.classList.add('image-hover');
+
+	tempDiv.appendChild(div);
+	div.appendChild(text);
+
+	document
+		.querySelector('.btn-get-meme')
+		.insertAdjacentHTML('beforebegin', tempDiv.innerHTML);
+}
+
+function updateTitle(meme) {
+	document.querySelector('.test p').innerHTML = meme.name;
 }

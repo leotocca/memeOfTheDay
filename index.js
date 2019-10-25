@@ -3,7 +3,8 @@ import { getMemes, ENDPOINT } from './api.js';
 import {
 	format,
 	filterMemesLowerThan,
-	sortResponseInAscendingOrder
+	sortResponseInAscendingOrder,
+	setImageHover
 } from './utils.js';
 
 const container = document.querySelector('.container');
@@ -23,20 +24,26 @@ memes
 
 function getRandomMeme(arr) {
 	const randomNumber = Math.floor(Math.random() * arr.length);
-	const memeUrl = arr[randomNumber].url;
-	img.setAttribute('src', `${memeUrl}`);
+	const memeURL = arr[randomNumber].url;
+	const memeALT = arr[randomNumber].name;
+	img.setAttribute('src', `${memeURL}`);
+	img.setAttribute('alt', `${memeALT}`);
+	return arr[randomNumber];
 }
 
 function getMemeOfTheDay(arr) {
 	const currentDate = new Date();
-	const memeUrl = arr[currentDate.getDate() - 1].url;
-	img.setAttribute('src', `${memeUrl}`);
+	const memeURL = arr[currentDate.getDate() - 1].url;
+	img.setAttribute('src', `${memeURL}`);
 }
 
 container.addEventListener('click', element => {
 	if (element.target.nodeName === 'BUTTON') {
 		element.target.parentElement.querySelector('h1').style.display = 'none';
 		element.target.innerText = 'Get another random meme!';
-		memes.then(memes => getRandomMeme(memes));
+		memes
+			.then(memes => getRandomMeme(memes))
+			.then(meme => setImageHover(meme))
+			.catch(error => console.error(error.message));
 	}
 });
