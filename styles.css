@@ -4,24 +4,20 @@
 	box-sizing: border-box;
 }
 
-body {
+.container {
 	background-color: #41b3a3;
 	height: 100vh;
 }
 
-.body,
-.container {
+.container,
+.image-container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
 
-.body {
-	height: 100%;
-}
-
-.container {
+.image-container {
 	position: relative;
 }
 
@@ -36,6 +32,7 @@ h1 {
 
 img {
 	max-width: 500px;
+	max-height: 500px;
 	display: block;
 }
 
@@ -80,6 +77,6 @@ button:hover {
 	font-weight: 600;
 }
 
-.container:hover .overlay {
+.image-container:hover .overlay {
 	opacity: 0.9;
 }
