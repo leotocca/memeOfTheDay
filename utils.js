@@ -44,7 +44,7 @@ function addTitleHTML(meme) {
 
 	div.appendChild(text);
 
-	document.querySelector('.container').appendChild(div);
+	document.querySelector('.image-container').appendChild(div);
 	//.insertAdjacentHTML('beforebegin', tempDiv.innerHTML);
 }
 
