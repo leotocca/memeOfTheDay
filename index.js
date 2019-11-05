@@ -4,16 +4,16 @@ import {
 	format,
 	filterMemesLowerThan,
 	sortResponseInAscendingOrder,
-	setImageHover
+	updateMemeTitle
 } from './utils.js';
 
 const container = document.querySelector('.container');
 const img = document.querySelector('.image-container img');
 
 const memes = getMemes(ENDPOINT)
-	.then(response => response.map(response => format(response)))
+	.then(response => response.map(format))
 	.then(response => filterMemesLowerThan(response, 500))
-	.then(response => sortResponseInAscendingOrder(response))
+	.then(sortResponseInAscendingOrder)
 	.catch(error => console.log(error.message));
 
 memes
@@ -23,28 +23,29 @@ memes
 	})
 	.catch(error => console.error(error.message));
 
-function getRandomMeme(arr) {
-	const randomNumber = Math.floor(Math.random() * arr.length);
-	const memeURL = arr[randomNumber].url;
-	const memeALT = arr[randomNumber].name;
-	img.setAttribute('src', `${memeURL}`);
-	img.setAttribute('alt', `${memeALT}`);
-	return arr[randomNumber];
+function getRandomMeme(memes) {
+	const randomNumber = Math.floor(Math.random() * memes.length);
+	const memeURL = memes[randomNumber].url;
+	const memeALT = memes[randomNumber].name;
+	img.src = memeURL;
+	img.alt = memeALT;
+	return memes[randomNumber];
 }
 
 function getMemeOfTheDay(arr) {
 	const currentDate = new Date();
-	const memeURL = arr[currentDate.getDate() - 1].url;
-	img.setAttribute('src', `${memeURL}`);
+	const meme = arr[currentDate.getDate() - 1];
+	img.setAttribute('src', meme.url);
+	document.querySelector('.overlay p').innerHTML = meme.name;
 }
 
 container.addEventListener('click', element => {
 	if (element.target.nodeName === 'BUTTON') {
-		element.target.parentElement.querySelector('h1').style.display = 'none';
+		element.target.parentElement.querySelector('h1').innerText = 'Random meme';
 		element.target.innerText = 'Get another random meme!';
 		memes
-			.then(memes => getRandomMeme(memes))
-			.then(meme => setImageHover(meme))
+			.then(getRandomMeme)
+			.then(updateMemeTitle)
 			.catch(error => console.error(error.message));
 	}
 });
