@@ -3,7 +3,7 @@ export {
 	format,
 	filterMemesLowerThan,
 	sortResponseInAscendingOrder,
-	setImageHover
+	updateMemeTitle
 };
 
 function checkStatus(response) {
@@ -25,29 +25,6 @@ function sortResponseInAscendingOrder(response) {
 	return response.sort((a, b) => Number(a.id) - Number(b.id));
 }
 
-function setImageHover(meme) {
-	if (!document.querySelector('.overlay')) {
-		addTitleHTML(meme);
-	} else {
-		updateTitle(meme);
-	}
-}
-
-function addTitleHTML(meme) {
-	const div = document.createElement('div');
-	const text = document.createElement('p');
-
-	div.classList.add('overlay');
-
-	text.classList.add('text');
-	text.innerText = meme.name;
-
-	div.appendChild(text);
-
-	document.querySelector('.image-container').appendChild(div);
-	//.insertAdjacentHTML('beforebegin', tempDiv.innerHTML);
-}
-
-function updateTitle(meme) {
+function updateMemeTitle(meme) {
 	document.querySelector('.overlay p').innerHTML = meme.name;
 }
