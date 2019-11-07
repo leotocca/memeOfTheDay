@@ -21,6 +21,33 @@
 	position: relative;
 }
 
+header {
+	display: flex;
+	justify-content: flex-end;
+	position: fixed;
+	background-color: #e3e2df;
+	width: 100vw;
+}
+
+header p {
+	margin: 10px 40px;
+	font-family: 'Raleway', sans-serif;
+}
+
+header p a {
+	text-decoration: none;
+}
+
+footer {
+	width: 100vw;
+	background-color: #e3e2df;
+	font-family: 'Raleway', sans-serif;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 h1 {
 	color: #fff;
 	font-size: 40px;
